@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+
+@theme{
+  --color-blue-950: oklch(0.2651 0.0707 280.44);
+  --color-gray-400:oklch(0.7949 0.0296 285.71)
+}
+
+
+body{
+  background-color: var(--color-gray-400);
+}
