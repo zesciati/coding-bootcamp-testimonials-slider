@@ -5,6 +5,10 @@
   "compilerOptions": {
     // Extra safety for array and object lookups, but may have false positives.
     "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
+      "esModuleInterop": true,
+
+    "types": ["node"],
 
     // Path mapping for cleaner imports.
     "paths": {

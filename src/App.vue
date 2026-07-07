@@ -11,7 +11,7 @@
     <section class="flex justify-center md:col-start-2 md:place-self-start ">
       <div class="relative top-12 ">
         <img
-          src="../images/image-tanya.jpg"
+          src=""
           alt=""
           class="w-60 rounded-md z-20 md:w-85 "
         />
@@ -20,7 +20,7 @@
         >
           <button class="bg-white pl-3 pr-5 py-2 rounded-l-full hover:bg-[#FBEFEF] active:bg-[#B5BAFF]">
             <img
-              src="../images/icon-prev.svg"
+              src=""
               alt="icon left pointed arrow"
               class=""
             />

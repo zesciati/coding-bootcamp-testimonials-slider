@@ -6,30 +6,30 @@ import express, {
   type NextFunction,
 } from "express";
 import cors from "cors";
-import Testimonials from "./data/testimonials.json";
+import {Testimonials} from "./data/testimonials.json";
+import { error } from "console";
 
 const app = express();
 app.use(cors()); // allows requests from any origin
 app.use(express.json()); // can read json format data sent by client
 
 
-type TestimonialsData = {
-  Testimonials: {
-    id: string;
-    paragraph: string;
-    name: string;
-    position: string;
-  }[];
-};
 
 app.get("/", (req, res) => {
-  res.send("halo");
+  res.send("halo gimana");
 });
 
 app.get("/api/testimonials", (req, res) => {
-  const typedData = Testimonials as TestimonialsData;
-  let result = [...typedData.Testimonials];
+  res.json(Testimonials);
 });
+
+app.get('/api/testimonials/:id', (req, res) => {
+  const item = Testimonials.find(t => t.id === req.params.id);
+  if(!item){
+    return res.status(404).json({error: 'Testimonials tidak ditemukan'});
+  }
+  res.json(item);
+})
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
