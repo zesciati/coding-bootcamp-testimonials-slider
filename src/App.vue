@@ -1,32 +1,75 @@
 <script setup lang="ts">
-/*
-1. button kiri atau kanan di klik 
-2. image dan paragraph akan berubah 
-*/
+import { ref, onMounted } from "vue";
 
+interface Testimonial {
+  id: string;
+  paragraph: string;
+  name: string;
+  position: string;
+  image: string;
+}
+
+const testimonials = ref<Testimonial[]>([]);
+const currentIndex = ref(0);
+const loading = ref(true);
+const error = ref("");
+
+const fetchTestimonials = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/testimonials");
+    if (!res.ok) throw new Error("Gagal fetch data");
+    testimonials.value = await res.json();
+  } catch (err) {
+    error.value = "Gagal memuat testimonials";
+    console.error(err);
+  } finally {
+    loading.value = false;
+  }
+};
+
+const prev = () => {
+  currentIndex.value =
+    (currentIndex.value - 1 + testimonials.value.length) %
+    testimonials.value.length;
+};
+
+const next = () => {
+  currentIndex.value = (currentIndex.value + 1) % testimonials.value.length;
+};
+
+onMounted(fetchTestimonials);
 </script>
 
 <template>
-  <div class="md:grid md:grid-cols-2 md:mx-auto md:w-190 ">
-    <section class="flex justify-center md:col-start-2 md:place-self-start ">
-      <div class="relative top-12 ">
+  <div v-if="loading">Loading</div>
+  <div v-else-if="error">{{ error }}</div>
+  <div></div>
+  <div class="md:grid md:grid-cols-2 md:mx-auto md:w-190">
+    <section class="flex justify-center md:col-start-2 md:place-self-start">
+      <div class="relative top-12">
         <img
-          src=""
-          alt=""
-          class="w-60 rounded-md z-20 md:w-85 "
+          :src="testimonials[currentIndex]?.image"
+          :alt="testimonials[currentIndex]?.name"
+          class="w-60 rounded-md z-20 md:w-85"
         />
         <div
-          class="flex items-center absolute justify-center left-17   px-2 py-2 rounded-2xl -bottom-6 z-20 "
+          class="flex items-center absolute justify-center left-17 px-2 py-2 rounded-2xl -bottom-6 z-20"
         >
-          <button class="bg-white pl-3 pr-5 py-2 rounded-l-full hover:bg-[#FBEFEF] active:bg-[#B5BAFF]">
+          <button
+            class="bg-white pl-3 pr-5 py-2 rounded-l-full hover:bg-[#FBEFEF] active:bg-[#B5BAFF]"
+            @click="prev"
+          >
             <img
-              src=""
+              src="/images/icon-prev.svg"
               alt="icon left pointed arrow"
               class=""
             />
           </button>
-          <button class="bg-white pl-5 pr-3 py-2 rounded-r-full hover:bg-[#FBEFEF] active:bg-[#B5BAFF]">
-            <img src="../images/icon-next.svg" alt="icon right pointed arrow" />
+          <button
+            class="bg-white pl-5 pr-3 py-2 rounded-r-full hover:bg-[#FBEFEF] active:bg-[#B5BAFF]"
+            @click="next"
+          >
+            <img src="/images/icon-next.svg" alt="icon right pointed arrow" />
           </button>
         </div>
         <img
@@ -37,12 +80,15 @@
       </div>
     </section>
 
-    <section class="mt-35 space-y-4 text-lg text-center md:text-left md:col-span-1 md:row-start-1 md:relative md:z-20 md:left-16">
+    <section
+      class="mt-35 space-y-4 text-lg text-center md:text-left md:col-span-1 md:row-start-1 md:relative md:z-20 md:left-16"
+    >
       <div class="px-10 z-20 relative md:px-0">
         <span class="">
-          "I've been interested in coding for a while but never taken the jump,
+          <!-- "I've been interested in coding for a while but never taken the jump,
           until now. I couldn't recommend this course enough. I'm now in the job
-          of my dreams and so excited about the future."
+          of my dreams and so excited about the future." -->
+          {{ testimonials[currentIndex]?.paragraph }}
         </span>
 
         <img
@@ -51,9 +97,12 @@
           class="z-10 absolute w-15 -top-5.5 left-39"
         />
       </div>
-      <div class="md:flex md:gap-x-2  ">
-        <div class="font-bold">Tanya Sinclair</div>
-        <div>UX Engineer</div>
+      <div class="md:flex md:gap-x-2">
+        <div class="font-bold">
+          <!-- Tanya Sinclair  -->
+          {{ testimonials[currentIndex]?.name }}
+        </div>
+        <div>{{ testimonials[currentIndex]?.position }}</div>
       </div>
     </section>
   </div>

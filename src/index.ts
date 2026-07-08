@@ -1,5 +1,3 @@
-// declare var require: any
-
 import express, {
   type Request,
   type Response,
@@ -23,13 +21,13 @@ app.get("/api/testimonials", (req, res) => {
   res.json(Testimonials);
 });
 
-app.get('/api/testimonials/:id', (req, res) => {
-  const item = Testimonials.find(t => t.id === req.params.id);
-  if(!item){
-    return res.status(404).json({error: 'Testimonials tidak ditemukan'});
-  }
-  res.json(item);
-})
+// app.get('/api/testimonials/:id', (req, res) => {
+//   const item = Testimonials.find(t => t.id === req.params.id);
+//   if(!item){
+//     return res.status(404).json({error: 'Testimonials tidak ditemukan'});
+//   }
+//   res.json(item);
+// })
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
