@@ -73,7 +73,7 @@ onMounted(fetchTestimonials);
           </button>
         </div>
         <img
-          src="../images/pattern-bg.svg"
+          src="/images/pattern-bg.svg"
           alt="pattern background"
           class="w-75 absolute -top-4 -left-9 -z-10 max-w-none md:w-103"
         />
@@ -92,7 +92,7 @@ onMounted(fetchTestimonials);
         </span>
 
         <img
-          src="../images/pattern-quotes.svg"
+          src="/images/pattern-quotes.svg"
           alt="pattern-quotes"
           class="z-10 absolute w-15 -top-5.5 left-39"
         />
