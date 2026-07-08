@@ -16,7 +16,7 @@ const error = ref("");
 
 const fetchTestimonials = async () => {
   try {
-    const res = await fetch("https://coding-bootcamp-testimonials-slider-production.up.railway.app/api/testimonials");
+    const res = await fetch("http://localhost:3000/api/testimonials");
     if (!res.ok) throw new Error("Gagal fetch data");
     testimonials.value = await res.json();
   } catch (err) {
