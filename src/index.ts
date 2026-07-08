@@ -9,7 +9,7 @@ import { error } from "console";
 
 const app = express();
 app.use(cors({
-  origin: ['https://coding-bootcamp-testimonials-slider.pages.dev', 'http://localhost:5173']
+  origin: ['https://coding-bootcamp-testimonials-slider.pages.dev', 'http://localhost:5173', ]
 })); // allows requests from any origin
 app.use(express.json()); // can read json format data sent by client
 
