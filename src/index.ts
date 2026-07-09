@@ -13,7 +13,6 @@ app.use(
     origin: [
       "https://coding-bootcamp-testimonials-slider.pages.dev",
       "http://localhost:5173",
-      "http://localhost:3000/api/testimonials",
     ],
   })
 ); // allows requests from any origin
