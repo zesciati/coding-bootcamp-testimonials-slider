@@ -4,16 +4,20 @@ import express, {
   type NextFunction,
 } from "express";
 import cors from "cors";
-import {Testimonials} from "./data/testimonials.json";
-import { error } from "console";
+import { Testimonials } from "./data/testimonials.json";
+import { httpServerHandler } from 'cloudflare:node';
 
 const app = express();
-app.use(cors({
-  origin: ['https://coding-bootcamp-testimonials-slider.pages.dev', 'http://localhost:5173', ]
-})); // allows requests from any origin
+app.use(
+  cors({
+    origin: [
+      "https://coding-bootcamp-testimonials-slider.pages.dev",
+      "http://localhost:5173",
+      "http://localhost:3000/api/testimonials",
+    ],
+  })
+); // allows requests from any origin
 app.use(express.json()); // can read json format data sent by client
-
-
 
 app.get("/", (req, res) => {
   res.send("halo gimana");
@@ -36,11 +40,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).send("Something broke!");
 });
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, (error: any) => {
-  if (error) {
-    throw error;
-  }
-  console.log("server is running on port 3000");
-});
+app.listen(3000); 
+
+export default httpServerHandler({ port: 3000 });
+// app.listen(PORT, (error: any) => {
+//   if (error) {
+//     throw error;
+//   }
+//   console.log("server is running on port 3000");
+// });
