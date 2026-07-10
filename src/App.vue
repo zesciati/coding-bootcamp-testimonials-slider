@@ -47,11 +47,14 @@ onMounted(fetchTestimonials);
   <div class="md:grid md:grid-cols-2 md:mx-auto md:w-190">
     <section class="flex justify-center md:col-start-2 md:place-self-start">
       <div class="relative top-12">
-        <img
-          :src="testimonials[currentIndex]?.image"
-          :alt="testimonials[currentIndex]?.name"
-          class="w-60 rounded-md z-20 md:w-85"
-        />
+        <Transition name="fade" mode="out-in">
+          <img
+            :key="currentIndex"
+            :src="testimonials[currentIndex]?.image"
+            :alt="testimonials[currentIndex]?.name"
+            class="w-60 rounded-md z-20 md:w-85"
+          />
+        </Transition>
         <div
           class="flex items-center absolute justify-center left-17 px-2 py-2 rounded-2xl -bottom-6 z-20"
         >
