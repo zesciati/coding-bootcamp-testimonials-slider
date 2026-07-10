@@ -43,7 +43,6 @@ onMounted(fetchTestimonials);
 <template>
   <div v-if="loading">Loading</div>
   <div v-else-if="error">{{ error }}</div>
-  <div></div>
   <div class="md:grid md:grid-cols-2 md:mx-auto md:w-190">
     <section class="flex justify-center md:col-start-2 md:place-self-start">
       <div class="relative top-12">
@@ -86,29 +85,49 @@ onMounted(fetchTestimonials);
     <section
       class="mt-35 space-y-4 text-lg text-center md:text-left md:col-span-1 md:row-start-1 md:relative md:z-20 md:left-16"
     >
-      <div class="px-10 z-20 relative md:px-0">
-        <span class="">
-          <!-- "I've been interested in coding for a while but never taken the jump,
-          until now. I couldn't recommend this course enough. I'm now in the job
-          of my dreams and so excited about the future." -->
-          {{ testimonials[currentIndex]?.paragraph }}
-        </span>
+      <Transition name="fade" mode="out-in">
+        <div :key="currentIndex">
+          <div class="px-10 z-20 relative md:px-0">
+            <span class="">
+              <!-- "I've been interested in coding for a while but never taken the jump,
+              until now. I couldn't recommend this course enough. I'm now in the job
+              of my dreams and so excited about the future." -->
+              {{ testimonials[currentIndex]?.paragraph }}
+            </span>
 
-        <img
-          src="/images/pattern-quotes.svg"
-          alt="pattern-quotes"
-          class="z-10 absolute w-15 -top-5.5 left-39"
-        />
-      </div>
-      <div class="md:flex md:gap-x-2">
-        <div class="font-bold">
-          <!-- Tanya Sinclair  -->
-          {{ testimonials[currentIndex]?.name }}
+            <img
+              src="/images/pattern-quotes.svg"
+              alt="pattern-quotes"
+              class="z-10 absolute w-15 -top-5.5 left-39"
+            />
+          </div>
+          <div class="md:flex md:gap-x-2">
+            <div class="font-bold">
+              <!-- Tanya Sinclair  -->
+              {{ testimonials[currentIndex]?.name }}
+            </div>
+            <div>
+              <!-- UI ux designer -->
+              {{ testimonials[currentIndex]?.position }}
+            </div>
+          </div>
         </div>
-        <div>{{ testimonials[currentIndex]?.position }}</div>
-      </div>
+      </Transition>
     </section>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.fade-enter-from {
+  opacity: 0;
+  transform: translateX(12px);
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(-12px);
+}
+</style>
