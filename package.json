@@ -16,7 +16,9 @@
     "cloudflare": "^6.5.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
+    "fs": "^0.0.1-security",
     "json-server": "^1.0.0-beta.15",
+    "mysql2": "^3.24.2",
     "nodemon": "^3.1.14",
     "tailwindcss": "^4.3.1",
     "vue": "^3.5.38"
